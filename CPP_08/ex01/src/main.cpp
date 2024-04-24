@@ -6,15 +6,14 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 20:02:59 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/04/24 18:41:04 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/04/24 19:22:15 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
 #include <cstdlib>
 
-// allocate vector?
-// function that fills vector with n numbers
+// equal overload (check if spans are same size)
 
 int main(void)
 {
@@ -94,20 +93,23 @@ int main(void)
 	{
 		std::cout << e.what() << std::endl;
 	}
-	
-}
 
-/* 
-int main()
-{
-	Span sp = Span(5);
-	sp.addNumber(6);
-	sp.addNumber(3);
-	sp.addNumber(17);
-	sp.addNumber(9);
-	sp.addNumber(11);
-	std::cout << sp.shortestSpan() << std::endl;
-	std::cout << sp.longestSpan() << std::endl;
-	return 0;
+	std::cout << "--- TESTING = overlaod ---" << std::endl;
+	try
+	{
+		Span	s1(5);
+		Span	s2(5);
+		Span	s3;
+		s1.fillRandom(s1.getStartVector(), s1.getEndVector());
+		std::cout << s1 << std::endl;
+
+		s2 = s1;
+		std::cout << s2 << std::endl;
+		s3 = s1;
+		std::cout << s3 << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
 }
- */

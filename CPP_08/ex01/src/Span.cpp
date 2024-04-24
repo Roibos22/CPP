@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 02:09:04 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/04/24 18:37:12 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/04/24 19:23:06 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,14 @@
 
 /* ------------------- CONSTRUCTORS & DECONSTRUCORS -------------------- */
 
-Span::Span(): _N(0), _elementsAdded(0)
-{
-	//std::cout << "Span Default Constructor called" << std::endl;
-}
+Span::Span(): _N(0), _elementsAdded(0) { }
 
 Span::Span(unsigned int n): _N(n), _elementsAdded(0)
 {
-	//std::cout << "Span Default Constructor called" << std::endl;
-	//this->_vector = new int[n];
 	this->_vector = std::vector<int>(n);
 }
 
-Span::~Span()
-{
-	//std::cout << "Span Deconstructor called" << std::endl;
-	/* if (this->_N != 0)
-		delete [] this->_vector; */
-}
+Span::~Span() { }
 
 Span::Span(const Span &span) { *this = span; }
 
@@ -108,7 +98,6 @@ unsigned int	Span::getN( void ) const
 
 int				Span::getElementAtPos(int pos) const
 {
-	// add try cath?
 	return (this->_vector[pos]);
 }
 
@@ -134,13 +123,27 @@ const char*	Span::ExceptionNotEnoughValues::what() const throw()
 	return ("Not enough values to calculate span.");
 }
 
+const char*	Span::ExceptionSouceSpanTooBig::what() const throw()
+{
+	return ("Source span is too big to be copied into Span.");
+}
+
 /* ---------------------------- OVERLOADS ------------------------------ */
 
-
-/* Span		&Span::operator=(const Span &origin)
+Span	&Span::operator=(const Span &origin)
 {
-	return (*this);
-} */
+	if (this->getN() >= origin.getN())
+	{
+		for (unsigned int i = 0; i < origin.getElementsStored(); i++)
+		{
+			this->_vector[i] = origin.getElementAtPos(i);
+		}
+		this->_elementsAdded = origin.getElementsStored();
+		return (*this);
+	} else {
+		throw ExceptionSouceSpanTooBig();
+	}
+}
 
 std::ostream	&operator<<(std::ostream &stream, Span const &span)
 {
