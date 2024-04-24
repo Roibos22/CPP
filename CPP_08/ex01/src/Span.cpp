@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 02:09:04 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/03/11 04:16:34 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/04/24 18:37:12 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 /* ------------------- CONSTRUCTORS & DECONSTRUCORS -------------------- */
 
-Span::Span(): _N(0), _elementsStored(0)
+Span::Span(): _N(0), _elementsAdded(0)
 {
 	//std::cout << "Span Default Constructor called" << std::endl;
 }
 
-Span::Span(unsigned int n): _N(n), _elementsStored(0)
+Span::Span(unsigned int n): _N(n), _elementsAdded(0)
 {
 	//std::cout << "Span Default Constructor called" << std::endl;
 	//this->_vector = new int[n];
-	this->_vector = new std::vector<int>(n);
+	this->_vector = std::vector<int>(n);
 }
 
 Span::~Span()
 {
 	//std::cout << "Span Deconstructor called" << std::endl;
-	if (this->_N != 0)
-		delete [] this->_vector;
+	/* if (this->_N != 0)
+		delete [] this->_vector; */
 }
 
 Span::Span(const Span &span) { *this = span; }
@@ -39,12 +39,12 @@ Span::Span(const Span &span) { *this = span; }
 
 void		Span::addNumber(int num)
 {
-	if (this->_elementsStored >= this->_N)
+	if (this->_elementsAdded >= this->_N)
 		throw ExceptionSpanFull();
 	else
 	{
-		this->_vector[this->_elementsStored] = num;
-		this->_elementsStored++;
+		this->_vector[this->getElementsStored()] = num; 
+		this->_elementsAdded++;
 	}
 }
 
@@ -83,20 +83,22 @@ int		Span::longestSpan(void) const
 	return (span);
 }
 
-void	Span::fillRandom(std::vector<int>::iterator begin, std::vector<int>::iterator end)
+void	Span::fillRandom(std::vector<int>::iterator start, std::vector<int>::iterator end)
 {
-	while (begin != end)
+	srand(time(NULL));
+	while (start != end)
 	{
-		this->_vector[this->_elementsStored] = num;
+		int num = rand();
+		this->addNumber(num);
+		start++;
 	}
 }
-
 
 /* ------------------------ GETTERS & SETTERS -------------------------- */
 
 unsigned int	Span::getElementsStored( void ) const
 {
-	return (this->_elementsStored);
+	return (this->_elementsAdded);
 }
 
 unsigned int	Span::getN( void ) const
@@ -108,6 +110,16 @@ int				Span::getElementAtPos(int pos) const
 {
 	// add try cath?
 	return (this->_vector[pos]);
+}
+
+std::vector<int>::iterator Span::getStartVector( void )
+{
+	return this->_vector.begin();
+}
+
+std::vector<int>::iterator Span::getEndVector( void )
+{
+	return this->_vector.end();
 }
 
 /* --------------------------- EXCEPTIONS ------------------------------ */

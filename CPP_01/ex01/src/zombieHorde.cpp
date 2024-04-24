@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 16:23:31 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/02/07 03:31:04 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/04/02 21:24:34 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ Zombie* zombieHorde( int N, std::string name )
 		horde[i].set_name(name);
 		horde[i].set_index(i);
 	}
-	
+
 	return (horde);
 }

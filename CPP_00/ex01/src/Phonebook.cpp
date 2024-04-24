@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 10:47:00 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/01/31 12:00:48 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/03/27 15:19:28 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	Phonebook::add_contact(Contact contact)
 	{
 		this->contacts[contactsCount] = contact;
 		this->contactsCount++;
-	} else 
+	}
+	else 
 	{
 		for (int i = 0; i < 7; i++)
 			this->contacts[i] = this->contacts[i + 1];
@@ -40,7 +41,7 @@ void	Phonebook::add_contact(Contact contact)
 void Phonebook::create_new_contact(void)
 {
 	Contact new_contact;
-	
+	 
 	new_contact.setFirstName(getValidInput("First Name"));
 	new_contact.setLastName(getValidInput("Last Name"));
 	new_contact.setNickname(getValidInput("Nickname"));

@@ -6,6 +6,19 @@
 #include <vector>
 #include <cstdlib>
 
+#include <vector>
+#include <stdexcept>
+#include <climits>
+
+#include <stdexcept>
+#include <iostream>
+#include <vector>
+#include <cmath>
+#include <ctime>
+#include <climits>
+#include <algorithm>
+#include <functional>
+
 class	Span
 {
 	public:
@@ -19,12 +32,14 @@ class	Span
 		void	addNumber(int num);
 		int		shortestSpan(void) const ;
 		int		longestSpan(void) const ;
+		void	fillRandom(std::vector<int>::iterator start, std::vector<int>::iterator end);
 
 		/* -------------- SETTERS & GETTERS ---------------- */
 		unsigned int	getElementsStored( void ) const;
 		unsigned int	getN( void ) const;
 		int				getElementAtPos(int pos) const;
-		void			fillRandom(std::vector<int>::iterator begin, std::vector<int>::iterator end);
+		std::vector<int>::iterator getStartVector( void );
+		std::vector<int>::iterator getEndVector( void );
 
 		/* ------------------ OVERLOADS -------------------- */
 		class	ExceptionSpanFull: public std::exception
@@ -44,7 +59,7 @@ class	Span
 	
 	private:
 		unsigned int		_N;
-		unsigned int		_elementsStored;
+		unsigned int		_elementsAdded;
 		std::vector<int>	_vector;
 };
 
