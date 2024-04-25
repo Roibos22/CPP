@@ -6,7 +6,7 @@
 #    By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/07 21:45:45 by lgrimmei          #+#    #+#              #
-#    Updated: 2024/04/24 19:40:45 by lgrimmei         ###   ########.fr        #
+#    Updated: 2024/04/25 17:48:45 by lgrimmei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,38 +16,43 @@ RESET = \033[0m
 
 # DIRECTORIES
 OBJ_DIR = obj
+SRC_DIR = src
 
 # EXECUTABLE NAME
-NAME = array
+NAME = abomination
 
 # SOURCE FILES
-SRCS =	main.cpp
+SRCS =	main.cpp \
+		MutantStack.cpp
 
 # OBJECT FILES
-OBJS = $(SRCS:.cpp=.o)
+OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.cpp=.o))
 
 # COMPILER
 CC = c++
 
 # COMPILATION FLAGS
-CFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
+CFLAGS = -Wall -Wextra -Werror -std=c++98
 
 # COMMANDS
 RM = rm -f
 MKDIR = mkdir -p
 
+# DIRECTORIES
+INCL_DIR = incl
+
 # RULES
-$(OBJ_DIR)/%.o: %.cpp
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@$(MKDIR) $(OBJ_DIR)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -I $(INCL_DIR) -c $< -o $@
 
 all : $(NAME)
 
 print-NAME:
 	@echo $(NAME)
 
-$(NAME) : $(addprefix $(OBJ_DIR)/, $(OBJS))
-	@$(CC) $(CFLAGS) $^ -o $(NAME)
+$(NAME) : $(OBJS)
+	@$(CC) $(CFLAGS) -I $(INCL_DIR) $^ -o $(NAME)
 	@echo "$(GREEN)./$(NAME) is ready!$(RESET)"
 
 fclean : clean
@@ -57,3 +62,5 @@ clean :
 	@$(RM) -r $(OBJ_DIR)
 
 re : fclean all
+
+.PHONY : all clean fclean re
