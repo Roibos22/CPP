@@ -1,0 +1,119 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Containers.txt                                     :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/04/26 15:52:02 by lgrimmei          #+#    #+#              #
+#    Updated: 2024/04/26 16:18:50 by lgrimmei         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+================================================================================
+Sequence Containers
+================================================================================
+
+std::vector
+- Explanation: A dynamic array-like structure.
+- Advantages: Fast access by index, good memory performance for large data sets.
+- Disadvantages: Costly insertions and deletions in the middle.
+- Example Use Case: Storing a list of high scores in a game where scores are
+	frequently accessed but rarely updated.
+
+--------------------------------------------------------------------------------
+
+std::list
+- Explanation: A doubly-linked list.
+- Advantages: Fast insertions and deletions anywhere in the list.
+- Disadvantages: No random access, higher memory overhead.
+- Example Use Case: Implementing a playlist in a music app where songs can be
+	added or removed from any position.
+
+--------------------------------------------------------------------------------
+
+std::deque
+- Explanation: A double-ended queue allowing insertions and deletions at both
+	ends.
+- Advantages: Fast insertion and deletion at both the front and back.
+- Disadvantages: Slower middle insertions; more complex than std::vector.
+- Example Use Case: A queue system in a real-time simulation where entities
+	can enter or leave from both ends.
+
+================================================================================
+Associative Containers
+================================================================================
+
+std::set
+- Explanation: A sorted set of unique elements.
+- Advantages: Automatically sorts elements, fast look-up.
+- Disadvantages: No direct indexing, slower insertion than unsorted containers.
+- Example Use Case: A leaderboard where each player has a unique score.
+
+--------------------------------------------------------------------------------
+
+std::multiset
+- Explanation: A sorted set that allows duplicate elements.
+- Advantages: Maintains sorting order, allows duplicates.
+- Disadvantages: No direct indexing.
+- Example Use Case: Storing the occurrence of words in a document, where words
+	can appear multiple times.
+
+--------------------------------------------------------------------------------
+
+std::map
+- Explanation: A sorted map of unique key-value pairs.
+- Advantages: Sorted by key, direct access by key, fast look-up.
+- Disadvantages: No direct indexing by numerical order.
+- Example Use Case: A customer database where each customer ID maps to customer
+	information.
+
+--------------------------------------------------------------------------------
+
+std::multimap
+- Explanation: A sorted map that allows keys to have multiple values.
+- Advantages: Maintains sorting order, can have multiple values for a key.
+- Disadvantages: No direct indexing by numerical order.
+- Example Use Case: An index of classes where each class ID (key) can map to
+	multiple student records (values).
+
+================================================================================
+Container Adapters
+================================================================================
+
+std::stack
+- Explanation: Adapts a container to provide LIFO (last-in, first-out) behavior.
+- Advantages: Provides controlled access to the underlying container with stack
+	semantics.
+- Disadvantages: Only provides access to the top element, with no iterators.
+- Example Use Case: Undo functionality in an application, where the last action
+	is the first to be undone.
+
+--------------------------------------------------------------------------------
+
+std::queue
+- Explanation: Adapts a container to provide FIFO (first-in, first-out)
+	behavior.
+- Advantages: Offers simple queue semantics for adding and removing elements.
+- Disadvantages: Only front and back access, no random access or iterators.
+- Example Use Case: A print job manager where jobs are processed in the order
+	they are submitted.
+
+--------------------------------------------------------------------------------
+
+std::priority_queue
+- Explanation: Adapts a container to provide priority queue behavior, where
+	elements are popped in priority order.
+- Advantages: Automatic sorting by priority when inserting elements.
+- Disadvantages: No direct access to all elements, only the top element
+	is accessible.
+- Example Use Case: An event scheduler where events are triggered based
+	on their priority.
+
+--------------------------------------------------------------------------------
+
+Container adapters like std::stack, std::queue, and std::priority_queue provide
+a restricted interface to the underlying container to ensure the behavior fits
+the adapter's concept (LIFO for stack, FIFO for queue, and ordered by priority
+for priority_queue). The choice of which container or container adapter to use
+depends on the specific problem domain and performance requirements.
