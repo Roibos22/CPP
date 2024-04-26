@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 17:46:56 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/04/25 17:46:57 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/04/25 20:54:23 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ class	MutantStack: public std::stack<T>
 	protected:
 	
 	private:
-		//T _data;
-
 };
 
 //std::ostream	&operator<<(std::ostream &stream, MutantStack const &mutantstack);
+
+#include "MutantStack.tpp"
 
 #endif // MutantStack_HPP

@@ -6,25 +6,25 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 20:20:15 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/04/25 17:45:51 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/04/26 15:27:18 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "MutantStack.hpp"
+#include <list>
 
 int	main(void)
 {
 	{
-		std::cout << "--- TESTING SUBJECT ---" << std::endl;
+		std::cout << "--- TESTING MutantStack ---" << std::endl;
 		
 		MutantStack<int> mstack;
-		//MutantStack<int> mstack;
-/* 		mstack.push(5);
+ 		mstack.push(5);
 		mstack.push(17);
-		std::cout << mstack.top() << std::endl;
+		std::cout << "Top: " << mstack.top() << std::endl;
 		
 		mstack.pop();
-		std::cout << mstack.size() << std::endl;
+		std::cout << "Size: " << mstack.size() << std::endl;
 		
 		mstack.push(3);
 		mstack.push(5);
@@ -38,10 +38,38 @@ int	main(void)
 		--it;
 		while (it != ite)
 		{
+			std::cout << *it << std::endl;
+			++it;
+		}
+		std::stack<int> s(mstack);
+	}
+
+	{
+		std::cout << "--- TESTING List ---" << std::endl;
+		
+		std::list<int> list;
+ 		list.push_back(5);
+ 		list.push_back(17);
+		std::cout << "Top: " << list.back() << std::endl;
+		
+		list.pop_back();
+		std::cout << "Size: " << list.size() << std::endl;
+		
+		list.push_back(3);
+		list.push_back(5);
+		list.push_back(737);
+		//[...]
+		list.push_back(0);
+		
+		std::list<int>::iterator it = list.begin();
+		std::list<int>::iterator ite = list.end();
+		++it;
+		--it;
+		while (it != ite)
+		{
 		std::cout << *it << std::endl;
 		++it;
 		}
-		std::stack<int> s(mstack);
-		return 0; */
+		std::list<int> s(list);
 	}
 }

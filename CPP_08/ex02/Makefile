@@ -6,7 +6,7 @@
 #    By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/07 21:45:45 by lgrimmei          #+#    #+#              #
-#    Updated: 2024/04/25 17:48:45 by lgrimmei         ###   ########.fr        #
+#    Updated: 2024/04/25 20:52:38 by lgrimmei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ NAME = abomination
 
 # SOURCE FILES
 SRCS =	main.cpp \
-		MutantStack.cpp
+		#MutantStack.cpp
 
 # OBJECT FILES
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.cpp=.o))

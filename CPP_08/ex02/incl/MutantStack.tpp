@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 15:08:04 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/04/25 17:44:01 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/04/25 20:45:27 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,22 @@
 /* ------------------- CONSTRUCTORS & DECONSTRUCORS -------------------- */
 
 template <typename T>
-MutantStack<T>::MutantStack() { return; }
+MutantStack<T>::MutantStack()
+{
+	return;
+}
 
 template <typename T>
-MutantStack<T>::~MutantStack() { return; }
+MutantStack<T>::~MutantStack()
+{
+	return;
+}
 
 template <typename T>
-MutantStack<T>::MutantStack(const MutantStack &mutantstack) { *this = mutantstack; }
+MutantStack<T>::MutantStack(const MutantStack &mutantstack)
+{
+	*this = mutantstack;
+}
 
 /* ----------------------------- METHODS ------------------------------- */
 
