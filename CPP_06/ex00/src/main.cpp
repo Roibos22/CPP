@@ -6,12 +6,20 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 17:51:53 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/03/11 00:14:28 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/04/29 13:28:59 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <ScalarConverter.hpp>
+
+// implicit downcast from double to float when using atof - DONE
+// forgot to check for overflows
+	// char: 0 - 255, sonst impossible
+	// int: MIN_INT - MAX_INT, sonst impossible
+	// float:
+	// double:
+// exact name of the executable in ex00 - DONE
 
 int main(int argc, char *argv[])
 {
