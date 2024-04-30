@@ -6,7 +6,7 @@
 #    By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/26 16:07:57 by lgrimmei          #+#    #+#              #
-#    Updated: 2024/04/26 16:25:50 by lgrimmei         ###   ########.fr        #
+#    Updated: 2024/04/26 17:58:30 by lgrimmei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,18 @@ Exercise 00 Bitcoin Exchange
 - i create the container by adding to the top always
 - i need to access them easily, by date
 	
-	-> vector
-	
 	-> map
+		- key (date) value (price) pairs
+		- fast lookup by keys
+		- also sorted
+
+1. convert db into map
+2. read in file as map (maybe nultimap)
+	- validate file
+		- validate format "date | value"
+		- validate date Year-Month-Day
+		- validate value a float or a positive integer, between 0 and 1000.
+3. ...
 
 ================================================================================
 Exercise 01 Reverse Polish Notation
@@ -29,8 +38,6 @@ Exercise 01 Reverse Polish Notation
 - easy access in front
 - easy popping and adding new
 
-	-> deque
-
 	-> stack
 
 ================================================================================
@@ -38,7 +45,5 @@ Exercise 02 PmergeMe
 ================================================================================
 
 	-> list
-	-> map
-
 	-> deque
 	-> vector

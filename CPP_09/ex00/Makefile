@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/02/16 19:21:25 by lgrimmei          #+#    #+#              #
-#    Updated: 2024/04/29 20:20:31 by lgrimmei         ###   ########.fr        #
+#    Created: 2024/03/07 21:45:45 by lgrimmei          #+#    #+#              #
+#    Updated: 2024/04/26 18:33:52 by lgrimmei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,11 @@ OBJ_DIR = obj
 SRC_DIR = src
 
 # EXECUTABLE NAME
-NAME = serializer
+NAME = btc
 
 # SOURCE FILES
-SRCS =	main.cpp\
-		Serializer.cpp
+SRCS =	main.cpp \
+		CSVReader.cpp
 
 # OBJECT FILES
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.cpp=.o))
