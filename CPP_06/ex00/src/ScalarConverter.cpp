@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 18:33:45 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/04/29 18:22:21 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/04/30 15:21:03 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,7 @@ e_type	ScalarConverter::getType(const::std::string &str)
 		res = FLOAT;
 	if (checkFormat(str, "^[[:space:]]*[+-]?[0-9]+\\.[0-9]+$")|| str == "nan" || str == "+inf" || str == "-inf")
 		res = DOUBLE;
+	std::cout << res << std::endl;
 	return (res);
 }
 

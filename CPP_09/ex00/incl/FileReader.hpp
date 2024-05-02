@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   CSVReader.hpp                                      :+:      :+:    :+:   */
+/*   FileReader.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 18:25:59 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/04/26 18:53:58 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/02 16:40:59 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,39 +16,45 @@
 #include <iostream>
 #include <map>
 #include <fstream>
+#include <sstream>
+#include <string>
 
-class	CSVReader
+class	FileReader
 {
 	public:
 		/* --------- CONSTRUCTORS & DECONSTRUCORS ---------- */
-		CSVReader();
-		CSVReader(std::string filename, std::string delimiter);
-		~CSVReader();
-		CSVReader(const CSVReader &csvreader);
+		FileReader();
+		FileReader(std::string filename);
+		~FileReader();
+		FileReader(const FileReader &csvreader);
 
 		/* ------------------- METHODS --------------------- */
-		void	readFile();
+		void	readDb();
 		int		validateDate(std::string date);
 		int		validateValue(std::string value);
+		bool	onlyDigits(std::string str);
 
 		/* -------------- SETTERS & GETTERS ---------------- */
-		std::string							getFilename() const;
-		std::string							getDelimiter() const;
-		std::map<std::string, std::string>	getContent() const;
+		std::string							getFilenameInput() const;
+		std::map<int, double>	getContentDb() const;
 		
 		/* ------------------ EXCEPTIONS ------------------- */
-
+		class	InvalidDateException: public std::exception
+		{
+			virtual const char	*what() const throw();
+		};
+	
 		/* ------------------ OVERLOADS -------------------- */
-		CSVReader	&operator=(const CSVReader &);
+		FileReader	&operator=(const FileReader &);
 
 	protected:
 
 	private:
-		std::string							_filename;
-		std::string							_delimiter;
-		std::map<std::string, std::string>	_content;
+		std::string				_filenameInput;
+		std::map<int, double>	_contentDb;
+		std::map<int, double>	_contentInput;
 };
 
-std::ostream	&operator<<(std::ostream &stream, CSVReader const &csvreader);
+std::ostream	&operator<<(std::ostream &stream, FileReader const &csvreader);
 
 #endif // CSVReader_HPP
