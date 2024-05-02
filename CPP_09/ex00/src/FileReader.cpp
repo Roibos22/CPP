@@ -6,38 +6,11 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 18:25:57 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/05/02 18:56:12 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/02 20:21:02 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "FileReader.hpp"
-
-// validate date
-	// validate year: min first date, max int max
-	// validate month: min 1, max 12
-	// validate day:
-		// if i == 2 && if year % 4 == 0 - 29 else - 28
-		// if i <= 7
-			// for % 2 != 0: min 1, max 31
-			// for % 2 == 0: min 1, max 30
-		// for i <= 12
-			// for % 2 != 0: min 1, max 30
-			// for % 2 == 0: min 1, max 31
-		// 1 - 31
-		// 2 - special
-		// 3 - 31
-		// 4 - 30
-		// 5 - 31
-		// 6 - 30
-		// 7 - 31
-		// 8 - 31
-		// 9 - 30
-		// 10 - 31
-		// 11 - 30
-		// 12 - 31
-	// transform date from YYYY-MM-DD to YYYYMMDD (make calculations easier)
-	// empty files!
-	// correct header
 
 /* ------------------- CONSTRUCTORS & DECONSTRUCORS -------------------- */
 
@@ -50,6 +23,7 @@ FileReader::FileReader(std::string filename)
 {
 	this->_filenameInput = filename;
 	this->readDb();
+	this->readInputFile();
 }
 
 FileReader::~FileReader()
@@ -61,9 +35,71 @@ FileReader::FileReader(const FileReader &csvreader) { *this = csvreader; }
 
 /* ----------------------------- METHODS ------------------------------- */
 
+void	FileReader::readInputFile()
+{
+	std::string		line;
+	std::string 	delimiter = " | ";
+	std::ifstream	file(this->_filenameInput.c_str());
+	if (!file.is_open())
+	{
+		std::cerr << "File not found." << std::endl;
+		return ;
+	}
+	
+	std::getline(file, line);
+	try
+	{
+		if (line != "date | value")
+			std::cerr << "Invalid header." << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+
+	while (std::getline(file, line))
+	{
+		std::string	dateString = line.substr(0, line.find(delimiter));
+		std::string	valueString = line.substr(line.find(delimiter) + 3);
+		
+		int			date;
+		double		value;
+		try
+		{
+			date = validateDate(dateString);
+			//std::cout << date << std::endl;
+		} catch (std::exception &e) {
+			std::cerr << e.what() << std::endl;
+		}
+		try
+		{
+			value = validateValue(valueString);
+			//std::cout << value << std::endl;
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << std::endl;
+		}
+		std::cout << dateString << " => " << value << " => ";
+		
+		// find date in db
+		
+		std::map<int, double>::iterator it; // Declare iterator explicitly
+		it = this->_contentDb.find(date); // Assign result of find to iterator
+		if (it != this->_contentDb.end())
+		{
+			double res = it->second * value;
+			std::cout << res << std::endl;
+		} else {
+			std::cout << "Key not found." << std::endl;
+		}
+
+	}
+}
+
 void	FileReader::readDb()
 {
-	std::ifstream	file(this->_filenameInput.c_str());
+	std::ifstream	file("data.csv");
 	std::string		line;
 	std::string 	delimiter = ",";
 
@@ -74,6 +110,16 @@ void	FileReader::readDb()
 	}
 
 	std::getline(file, line);
+	try
+	{
+		if (line != "date,exchange_rate")
+			std::cerr << "Invalid header." << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+	
 	while (std::getline(file, line))
 	{
 		if (line.find(delimiter) != std::string::npos)
@@ -85,25 +131,20 @@ void	FileReader::readDb()
 			try
 			{
 				date = validateDate(dateString);
-				std::cout << date << std::endl;
+				//std::cout << date << std::endl;
 			} catch (std::exception &e) {
 				std::cerr << e.what() << std::endl;
 			}
 			try
 			{
 				value = validateValue(valueString);
-				std::cout << value << std::endl;
+				this->_contentDb.insert(std::pair<int, double>(date, value));
+				//std::cout << date << " => " << value << std::endl;
 			}
 			catch(const std::exception& e)
 			{
 				std::cerr << e.what() << std::endl;
 			}
-			
-			//if (validateDate(date) && validateValue(value))
-			//this->_contentDb[date] = value;
-			//else
-			//	std::cerr << "Invalid line: " << line << std::endl; // TODO: throw exception
-			//std::cout << date << " : " << this->_content[date] << " | ";
 		}
 	}
 	file.close();
@@ -114,10 +155,11 @@ double		FileReader::validateValue(std::string valueString)
 {
 	double	value;
 	std::istringstream iss(valueString);
-	std::cout << valueString << " -> ";
+	//std::cout << valueString << " -> ";
 	iss >> value;
 	if (iss.fail())
 		return (throw InvalidValueException(), 0);
+	//std::cout << std::endl << valueString << " -> " << value << std::endl;
 	return (value);
 }
 
@@ -135,7 +177,7 @@ int		FileReader::validateDate(std::string date)
 	int	year;
 	int	month;
 	int	day;
-	std::cout << date << " -> ";
+	//std::cout << date << " -> ";
 	
 	std::string yearString = date.substr(0, date.find("-"));
 	int len0 = yearString.length();
@@ -200,6 +242,11 @@ const char*	FileReader::InvalidDateException::what() const throw()
 const char*	FileReader::InvalidValueException::what() const throw()
 {
 	return "Invalid Value";
+}
+
+const char*	FileReader::InvalidHeaderException::what() const throw()
+{
+	return "Invalid Header";
 }
 
 /* ---------------------------- OVERLOADS ------------------------------ */

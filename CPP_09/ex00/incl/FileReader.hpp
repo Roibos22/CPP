@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 18:25:59 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/05/02 18:53:46 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/02 19:05:30 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,13 @@ class	FileReader
 
 		/* ------------------- METHODS --------------------- */
 		void	readDb();
+		void	readInputFile();
 		int		validateDate(std::string date);
 		double	validateValue(std::string value);
 		bool	onlyDigits(std::string str);
 
 		/* -------------- SETTERS & GETTERS ---------------- */
-		std::string							getFilenameInput() const;
+		std::string				getFilenameInput() const;
 		std::map<int, double>	getContentDb() const;
 		
 		/* ------------------ EXCEPTIONS ------------------- */
@@ -44,6 +45,10 @@ class	FileReader
 			virtual const char	*what() const throw();
 		};
 		class	InvalidValueException: public std::exception
+		{
+			virtual const char	*what() const throw();
+		};
+		class	InvalidHeaderException: public std::exception
 		{
 			virtual const char	*what() const throw();
 		};
