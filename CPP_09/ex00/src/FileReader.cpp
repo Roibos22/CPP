@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 18:25:57 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/05/02 18:44:49 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/02 18:56:12 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,14 +81,24 @@ void	FileReader::readDb()
 			std::string	dateString = line.substr(0, line.find(delimiter));
 			std::string	valueString = line.substr(line.find(delimiter) + 1);
 			int			date;
-			try {
+			double		value;
+			try
+			{
 				date = validateDate(dateString);
+				std::cout << date << std::endl;
 			} catch (std::exception &e) {
 				std::cerr << e.what() << std::endl;
-				//return ;
 			}
-			std::cout << date << std::endl;
-			//double		value = validateValue(valueString);
+			try
+			{
+				value = validateValue(valueString);
+				std::cout << value << std::endl;
+			}
+			catch(const std::exception& e)
+			{
+				std::cerr << e.what() << std::endl;
+			}
+			
 			//if (validateDate(date) && validateValue(value))
 			//this->_contentDb[date] = value;
 			//else
@@ -97,6 +107,18 @@ void	FileReader::readDb()
 		}
 	}
 	file.close();
+}
+
+
+double		FileReader::validateValue(std::string valueString)
+{
+	double	value;
+	std::istringstream iss(valueString);
+	std::cout << valueString << " -> ";
+	iss >> value;
+	if (iss.fail())
+		return (throw InvalidValueException(), 0);
+	return (value);
 }
 
 bool	FileReader::onlyDigits(std::string str)
@@ -113,7 +135,7 @@ int		FileReader::validateDate(std::string date)
 	int	year;
 	int	month;
 	int	day;
-	std::cout << date << std::endl;
+	std::cout << date << " -> ";
 	
 	std::string yearString = date.substr(0, date.find("-"));
 	int len0 = yearString.length();
@@ -126,40 +148,35 @@ int		FileReader::validateDate(std::string date)
 	std::istringstream issDay(dayString);
 
 	if (!onlyDigits(yearString) || !onlyDigits(monthString) || !onlyDigits(dayString))
-		throw InvalidDateException();
+		return (throw InvalidDateException(), 0);
 	if (yearString.length() < 4 || monthString.length() != 2 || dayString.length() != 2)
-		throw InvalidDateException();
+		return (throw InvalidDateException(), 0);
 	issYear >> year;
 	issMonth >> month;
 	issDay >> day;
 	if (issYear.fail() || issMonth.fail() || issDay.fail())
-		throw InvalidDateException();
+		return (throw InvalidDateException(), 0);
 	if (year < 2004 || year > 9999 || month < 1 || month > 12) // TODO adjust max year
-		throw InvalidDateException();
+		return (throw InvalidDateException(), 0);
 	if (month == 2 && year % 4 == 0 && day > 29)
-		throw InvalidDateException();
+		return (throw InvalidDateException(), 0);
 	else if (month == 2 && year % 4 != 0 && day > 28)
-		throw InvalidDateException();
+		return (throw InvalidDateException(), 0);
 	else if (month <= 7)
 	{
 		if ((month % 2 != 0 && day > 31) || (month % 2 == 0 && day > 30))
-			throw InvalidDateException();
+			return (throw InvalidDateException(), 0);
 	}
 	else if (month <= 12)
 	{
 		if ((month % 2 != 0 && day > 30) || (month % 2 == 0 && day > 31))
-			throw InvalidDateException();
+			return (throw InvalidDateException(), 0);
 	}
 
 	res = year * 10000 + month * 100 + day;
 	return (res);
 }
 
-int		FileReader::validateValue(std::string value)
-{
-	std::cout << value << std::endl;
-	return (1);
-}
 
 /* ------------------------ SETTERS & GETTERS -------------------------- */
 
@@ -178,6 +195,11 @@ std::map<int, double> FileReader::getContentDb() const
 const char*	FileReader::InvalidDateException::what() const throw()
 {
 	return "Invalid Date";
+}
+
+const char*	FileReader::InvalidValueException::what() const throw()
+{
+	return "Invalid Value";
 }
 
 /* ---------------------------- OVERLOADS ------------------------------ */

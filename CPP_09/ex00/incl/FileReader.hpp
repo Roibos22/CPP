@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 18:25:59 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/05/02 16:40:59 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/02 18:53:46 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ class	FileReader
 		/* ------------------- METHODS --------------------- */
 		void	readDb();
 		int		validateDate(std::string date);
-		int		validateValue(std::string value);
+		double	validateValue(std::string value);
 		bool	onlyDigits(std::string str);
 
 		/* -------------- SETTERS & GETTERS ---------------- */
@@ -40,6 +40,10 @@ class	FileReader
 		
 		/* ------------------ EXCEPTIONS ------------------- */
 		class	InvalidDateException: public std::exception
+		{
+			virtual const char	*what() const throw();
+		};
+		class	InvalidValueException: public std::exception
 		{
 			virtual const char	*what() const throw();
 		};
