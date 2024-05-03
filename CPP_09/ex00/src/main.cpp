@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 18:31:27 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/05/02 19:07:23 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/03 18:56:07 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,11 @@
 int main( int argc, char *argv[] )
 {
 	if (argc != 2)
-		return (0); // TODO
+	{
+		std::cerr << "Error: could not open file" << std::endl;
+		return (-1);
+	}
 	FileReader	fileReader(argv[1]);
-	//std::cout << csvReader;
+	fileReader.calculateValues();
+	return (0);
 }

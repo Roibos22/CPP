@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 18:25:59 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/05/02 19:05:30 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/03 18:18:57 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,14 @@ class	FileReader
 		FileReader(const FileReader &csvreader);
 
 		/* ------------------- METHODS --------------------- */
-		void	readDb();
-		void	readInputFile();
+		int	readDb();
+		int	readInputFile();
 		int		validateDate(std::string date);
-		double	validateValue(std::string value);
+		double	validateValueDb(std::string value);
+		double	validateValueInput(std::string value);
 		bool	onlyDigits(std::string str);
+		void	printRes(int date, double value, std::string dateString);
+		void	calculateValues( void );
 
 		/* -------------- SETTERS & GETTERS ---------------- */
 		std::string				getFilenameInput() const;
@@ -42,7 +45,8 @@ class	FileReader
 		/* ------------------ EXCEPTIONS ------------------- */
 		class	InvalidDateException: public std::exception
 		{
-			virtual const char	*what() const throw();
+			public:
+				virtual const char	*what() const throw();
 		};
 		class	InvalidValueException: public std::exception
 		{
@@ -52,6 +56,15 @@ class	FileReader
 		{
 			virtual const char	*what() const throw();
 		};
+		class	ValueNegativeException: public std::exception
+		{
+			virtual const char	*what() const throw();
+		};
+		class	ValueTooLargeException: public std::exception
+		{
+			virtual const char	*what() const throw();
+		};
+
 	
 		/* ------------------ OVERLOADS -------------------- */
 		FileReader	&operator=(const FileReader &);
