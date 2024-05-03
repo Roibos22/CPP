@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 19:35:57 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/05/03 20:21:06 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/03 20:23:16 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,6 @@ void	RPN::calculate()
 
 	for (size_t i = 0; i < _input.size(); i++)
 	{
-		// if is digit
-			// push to stack
-
-		// if is operator
-			// pop 2 elements from stack
-			// apply operator
-			// push result to stack
-
-		// if is space
-			// do nothing
-
 		if (std::isdigit(_input[i]))
 			stack.push(_input[i] - '0');
 		else if (isOperator(_input[i]))
@@ -84,7 +73,6 @@ void	RPN::calculate()
 	std::cout << stack.top() << std::endl;
 }
 
-
 bool	RPN::isOperator(char c) 
 {
 	return c == '+' || c == '-' || c == '*' || c == '/' || c == '%' || c == '^';
@@ -92,14 +80,12 @@ bool	RPN::isOperator(char c)
 
 int	RPN::validate_input()
 {
-	// check every second char is space
 	for (size_t i = 1; i < _input.size(); i += 2) 
 	{
 		if (!std::isspace(_input[i]))
 			return (-1);
 	}
 
-	// every other second must be a digit or operator
 	for (size_t i = 0; i < _input.size(); i += 2) 
 	{
 		if (!std::isdigit(_input[i]) && !isOperator(_input[i]))
