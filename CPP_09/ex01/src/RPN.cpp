@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 19:35:57 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/05/03 20:23:16 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/03 20:59:36 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,10 @@ void	RPN::calculate()
 			}
 		}
 	}
-	std::cout << stack.top() << std::endl;
+	if (stack.size() == 1)
+		std::cout << stack.top() << std::endl;
+	else
+		std::cerr << "Error: expression not resolvable to one number" << std::endl;
 }
 
 bool	RPN::isOperator(char c) 

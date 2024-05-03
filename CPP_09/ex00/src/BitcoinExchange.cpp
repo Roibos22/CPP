@@ -248,7 +248,7 @@ int		BitcoinExchange::validateDate(std::string date)
 	issDay >> day;
 	if (issYear.fail() || issMonth.fail() || issDay.fail())
 		return (throw InvalidDateException(), 0);
-	if (year < 2004 || year > 9999 || month < 1 || month > 12) // TODO adjust max year
+	if (year < 2004 || year >= 214748 || month < 1 || month > 12) // TODO adjust max year
 		return (throw InvalidDateException(), 0);
 	if (month == 2 && year % 4 == 0 && day > 29)
 		return (throw InvalidDateException(), 0);
