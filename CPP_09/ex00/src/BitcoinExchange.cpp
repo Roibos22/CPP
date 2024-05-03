@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FileReader.cpp                                     :+:      :+:    :+:   */
+/*   BitcoinExchange.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,30 +10,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "FileReader.hpp"
+#include "BitcoinExchange.hpp"
 
 /* ------------------- CONSTRUCTORS & DECONSTRUCORS -------------------- */
 
-FileReader::FileReader()
+BitcoinExchange::BitcoinExchange()
 {
 
 }
 
-FileReader::FileReader(std::string filename)
+BitcoinExchange::BitcoinExchange(std::string filename)
 {
 	this->_filenameInput = filename;
 }
 
-FileReader::~FileReader()
+BitcoinExchange::~BitcoinExchange()
 {
 
 }
 
-FileReader::FileReader(const FileReader &csvreader) { *this = csvreader; }
+BitcoinExchange::BitcoinExchange(const BitcoinExchange &csvreader) { *this = csvreader; }
 
 /* ----------------------------- METHODS ------------------------------- */
 
-void	FileReader::calculateValues( void )
+void	BitcoinExchange::calculateValues( void )
 {
 	if (this->readDb() == -1)
 		return ;
@@ -41,7 +41,7 @@ void	FileReader::calculateValues( void )
 		return ;
 }
 
-void	FileReader::printRes(int date, double value, std::string dateString)
+void	BitcoinExchange::printRes(int date, double value, std::string dateString)
 {
 	std::map<int, double>::iterator it;
 	it = this->_contentDb.find(date);
@@ -66,7 +66,7 @@ void	FileReader::printRes(int date, double value, std::string dateString)
 	}
 }
 
-int	FileReader::readInputFile()
+int	BitcoinExchange::readInputFile()
 {
 	std::string		line;
 	std::string 	delimiter = " | ";
@@ -123,7 +123,7 @@ int	FileReader::readInputFile()
 	return (0);
 }
 
-int	FileReader::readDb()
+int	BitcoinExchange::readDb()
 {
 	std::ifstream	file("data.csv");
 	std::string		line;
@@ -190,7 +190,7 @@ int	FileReader::readDb()
 }
 
 
-double		FileReader::validateValueDb(std::string valueString)
+double		BitcoinExchange::validateValueDb(std::string valueString)
 {
 	double	value;
 	std::istringstream iss(valueString);
@@ -200,7 +200,7 @@ double		FileReader::validateValueDb(std::string valueString)
 	return (value);
 }
 
-double		FileReader::validateValueInput(std::string valueString)
+double		BitcoinExchange::validateValueInput(std::string valueString)
 {
 	double	value;
 	std::istringstream iss(valueString);
@@ -214,7 +214,7 @@ double		FileReader::validateValueInput(std::string valueString)
 	return (value);
 }
 
-bool	FileReader::onlyDigits(std::string str)
+bool	BitcoinExchange::onlyDigits(std::string str)
 {
 	for (std::size_t i = 0; i < str.size(); ++i)
 		if (!std::isdigit(str.at(i)))
@@ -222,7 +222,7 @@ bool	FileReader::onlyDigits(std::string str)
 	return true;
 }
 
-int		FileReader::validateDate(std::string date)
+int		BitcoinExchange::validateDate(std::string date)
 {
 	int	res;
 	int	year;
@@ -272,39 +272,39 @@ int		FileReader::validateDate(std::string date)
 
 /* ------------------------ SETTERS & GETTERS -------------------------- */
 
-std::string FileReader::getFilenameInput() const
+std::string BitcoinExchange::getFilenameInput() const
 {
 	return this->_filenameInput;
 }
 
 
-std::map<int, double> FileReader::getContentDb() const
+std::map<int, double> BitcoinExchange::getContentDb() const
 {
 	return this->_contentDb;
 }
 
 /* --------------------------- EXCEPTIONS ------------------------------ */
-const char*	FileReader::InvalidDateException::what() const throw()
+const char*	BitcoinExchange::InvalidDateException::what() const throw()
 {
 	return "Error: Invalid Date";
 }
 
-const char*	FileReader::InvalidValueException::what() const throw()
+const char*	BitcoinExchange::InvalidValueException::what() const throw()
 {
 	return "Error: Invalid Value";
 }
 
-const char*	FileReader::InvalidHeaderException::what() const throw()
+const char*	BitcoinExchange::InvalidHeaderException::what() const throw()
 {
 	return "Error: Invalid Header";
 }
 
-const char*	FileReader::ValueNegativeException::what() const throw()
+const char*	BitcoinExchange::ValueNegativeException::what() const throw()
 {
 	return "Error: not a positive number";
 }
 
-const char*	FileReader::ValueTooLargeException::what() const throw()
+const char*	BitcoinExchange::ValueTooLargeException::what() const throw()
 {
 	return "Error: too large a number";
 }
@@ -312,7 +312,7 @@ const char*	FileReader::ValueTooLargeException::what() const throw()
 /* ---------------------------- OVERLOADS ------------------------------ */
 
 
-FileReader		&FileReader::operator=(const FileReader &origin)
+BitcoinExchange		&BitcoinExchange::operator=(const BitcoinExchange &origin)
 {
 	if (this != &origin)
 	{
@@ -321,7 +321,7 @@ FileReader		&FileReader::operator=(const FileReader &origin)
 	return (*this);
 }
 
-std::ostream	&operator<<(std::ostream &stream, FileReader const &csvreader)
+std::ostream	&operator<<(std::ostream &stream, BitcoinExchange const &csvreader)
 {
 	stream << "CSVReader" << std::endl;
 	stream << "File: " << csvreader.getFilenameInput() << std::endl;

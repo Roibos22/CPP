@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 18:25:59 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/05/03 18:18:57 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/03 19:34:14 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@
 #include <sstream>
 #include <string>
 
-class	FileReader
+class	BitcoinExchange
 {
 	public:
 		/* --------- CONSTRUCTORS & DECONSTRUCORS ---------- */
-		FileReader();
-		FileReader(std::string filename);
-		~FileReader();
-		FileReader(const FileReader &csvreader);
+		BitcoinExchange();
+		BitcoinExchange(std::string filename);
+		~BitcoinExchange();
+		BitcoinExchange(const BitcoinExchange &csvreader);
 
 		/* ------------------- METHODS --------------------- */
 		int	readDb();
@@ -67,7 +67,7 @@ class	FileReader
 
 	
 		/* ------------------ OVERLOADS -------------------- */
-		FileReader	&operator=(const FileReader &);
+		BitcoinExchange	&operator=(const BitcoinExchange &);
 
 	protected:
 
@@ -77,6 +77,6 @@ class	FileReader
 		std::map<int, double>	_contentInput;
 };
 
-std::ostream	&operator<<(std::ostream &stream, FileReader const &csvreader);
+std::ostream	&operator<<(std::ostream &stream, BitcoinExchange const &csvreader);
 
 #endif // CSVReader_HPP

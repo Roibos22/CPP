@@ -6,7 +6,7 @@
 #    By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/07 21:45:45 by lgrimmei          #+#    #+#              #
-#    Updated: 2024/05/03 19:35:15 by lgrimmei         ###   ########.fr        #
+#    Updated: 2024/05/03 19:50:35 by lgrimmei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,11 @@ OBJ_DIR = obj
 SRC_DIR = src
 
 # EXECUTABLE NAME
-NAME = btc
+NAME = RPN
 
 # SOURCE FILES
 SRCS =	main.cpp \
-		BitcoinExchange.cpp
+		RPN.cpp
 
 # OBJECT FILES
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.cpp=.o))
