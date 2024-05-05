@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: leon <leon@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 19:35:54 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/05/03 20:58:01 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/05 18:50:35 by leon             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 // TODO: segfaults
 // TODO: expression does not end in 1 number
+	// make it so if it does not end in one number the rest is just printed
 
 int main( int argc, char *argv[])
 {
