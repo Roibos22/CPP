@@ -1,23 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/06 14:01:28 by lgrimmei          #+#    #+#             */
+/*   Updated: 2024/05/06 14:10:28 by lgrimmei         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 
 #include "PmergeMe.hpp"
 
 int main (int argc, char *argv[])
 {
-    if (argc == 1)
-        std::cerr << "Error" << std::endl;
-    
-    // validate input and read into containers
-    for (int i = 0; i < argc; i++)
-    {
-        // if argv[i] == positive int
-            // put into containers
-        // else
-            // std::cerr << "Error" << std::endl;
-    }
-    
-    // create PmergeMe
+	if (argc == 1)
+		std::cerr << "Error" << std::endl;
+	
+	PmergeMe pme(argc, argv);
+	std::cout << pme << std::endl;
+	// create PmergeMe
 
-    // run sort
+	// run sort
 
-    // print res
+	// print res
 }
