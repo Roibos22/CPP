@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 14:01:33 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/05/07 00:03:32 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/07 00:09:21 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ class	PmergeMe
 	protected:
 	
 	private:
-		int					_args;
 		std::deque<int>		_deque;
 		std::vector<int>	_vector;
 		int					_dequeTime;

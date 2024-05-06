@@ -6,11 +6,25 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 14:01:31 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/05/07 00:04:26 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/07 00:14:30 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
+
+#include <algorithm> // for std::sort and std::unique
+
+bool hasDuplicates(const std::vector<int>& data)
+{
+	std::vector<int> sortedData = data; // Create a copy to avoid modifying the original vector
+	std::sort(sortedData.begin(), sortedData.end());
+	for (unsigned int i = 1; i < sortedData.size(); ++i)
+	{
+		if (sortedData[i] == sortedData[i - 1])
+			return true;
+	}
+	return false;
+}
 
 template<typename T>
 std::string vectorToString(const std::vector<T>& vec, const std::string& delimiter = "")
@@ -49,7 +63,9 @@ PmergeMe::PmergeMe(int argc, char **argv)
 			this->_vector.push_back(tmp);
 		}
 		else
-			std::cerr << "Error" << std::endl;
+			throw std::runtime_error("Error");
+		if (hasDuplicates(this->_vector))
+			throw std::runtime_error("Error");
 	}
 	this->_beforeString = vectorToString(this->_vector, " ");
 	this->generateSortingSequence(this->_vector.size());
