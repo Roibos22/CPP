@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 14:01:28 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/05/06 14:10:28 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/06 15:26:10 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int main (int argc, char *argv[])
 		std::cerr << "Error" << std::endl;
 	
 	PmergeMe pme(argc, argv);
+	pme.sortVector();
 	std::cout << pme << std::endl;
 	// create PmergeMe
 

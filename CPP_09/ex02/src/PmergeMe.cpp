@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 14:01:31 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/05/06 14:22:19 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/06 15:27:09 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,32 @@ PmergeMe::PmergeMe(const PmergeMe &pme) { *this = pme; }
 
 /* ----------------------------- METHODS ------------------------------- */
 
-void printDeque(const std::deque<int>& dq) {
+void	PmergeMe::sortVector()
+{
+	clock_t start_time = clock();
+	usleep(5);
+
+	clock_t end_time = clock();
+	_vectorTime = end_time - start_time;
+}
+
+void	PmergeMe::sortDeque()
+{
+	clock_t start_time = clock();
+	usleep(5);
+
+	clock_t end_time = clock();
+	_dequeTime = end_time - start_time;
+}
+
+void	PmergeMe::printResult()
+{
+	
+}
+
+void	PmergeMe::printDeque() const
+{
+	std::deque<int>	dq = this->getDeque();
 	std::cout << "Deque: ";
 	if (dq.empty())
 	{
@@ -57,8 +82,9 @@ void printDeque(const std::deque<int>& dq) {
 	std::cout << std::endl;
 }
 
-void printVector(const std::vector<int>& vec)
+void	PmergeMe::printVector() const
 {
+	std::vector<int>	vec = this->getVector();
 	std::cout << "Vector: ";
 	if (vec.empty())
 	{
@@ -97,8 +123,8 @@ PmergeMe		&PmergeMe::operator=(const PmergeMe &origin)
 std::ostream	&operator<<(std::ostream &stream, PmergeMe const &pme)
 {
 	(void)pme;
-	printDeque(pme.getDeque());
-	printVector(pme.getVector());
+	pme.printDeque();
+	pme.printVector();
 	return (stream);
 }
 
