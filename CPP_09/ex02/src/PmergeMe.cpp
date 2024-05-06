@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 14:01:31 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/05/06 15:27:09 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/06 15:31:54 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	PmergeMe::sortDeque()
 
 void	PmergeMe::printResult()
 {
-	
+	std::cout << << std::endl;
 }
 
 void	PmergeMe::printDeque() const
@@ -106,6 +106,17 @@ std::deque<int>		PmergeMe::getDeque() const
 {
 	return (this->_deque);
 }
+
+int					PmergeMe::getVectorTime() const
+{
+	return (this->_vectorTime);
+}
+
+int					PmergeMe::getDequeTime() const
+{
+	return (this->_dequeTime);
+}
+
 /* --------------------------- EXCEPTIONS ------------------------------ */
 
 /* ---------------------------- OVERLOADS ------------------------------ */

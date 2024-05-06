@@ -6,7 +6,7 @@
 #    By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/07 21:45:45 by lgrimmei          #+#    #+#              #
-#    Updated: 2024/04/24 19:40:45 by lgrimmei         ###   ########.fr        #
+#    Updated: 2024/05/06 16:05:15 by lgrimmei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ OBJS = $(SRCS:.cpp=.o)
 CC = c++
 
 # COMPILATION FLAGS
-CFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
+CFLAGS = -Wall -Wextra -Werror -std=c++98
 
 # COMMANDS
 RM = rm -f

@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 14:01:33 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/05/06 15:26:41 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/06 15:30:50 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ class	PmergeMe
 		/* -------------- SETTERS & GETTERS ---------------- */
 		std::vector<int>	getVector() const;
 		std::deque<int>		getDeque() const;
+		int					getDequeTime() const;
+		int					getVectorTime() const;
 
 		/* ------------------ EXCEPTIONS ------------------- */
 

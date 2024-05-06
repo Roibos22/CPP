@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/24 20:20:15 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/05/03 14:14:49 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/06 16:08:22 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ int	main(void)
 		--it;
 		while (it != ite)
 		{
-		std::cout << *it << std::endl;
-		++it;
+			std::cout << *it << std::endl;
+			++it;
 		}
 		std::list<int> s(list);
 	}
