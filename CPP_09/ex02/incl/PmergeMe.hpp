@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 14:01:33 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/05/06 15:30:50 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/07 00:03:32 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include <vector>
 #include <ctime>
 #include <unistd.h> // TODO DELETE
+#include <sstream>
 
 class	PmergeMe
 {
@@ -37,6 +38,8 @@ class	PmergeMe
 		//void	startTimerVector();
 		void	sortDeque();
 		void	sortVector();
+		void	recursiveSelectionSortVector(std::vector<std::pair<int, int> > &pairs, int low, int high);
+		void	generateSortingSequence(int size);
 
 		/* -------------- SETTERS & GETTERS ---------------- */
 		std::vector<int>	getVector() const;
@@ -52,10 +55,14 @@ class	PmergeMe
 	protected:
 	
 	private:
+		int					_args;
 		std::deque<int>		_deque;
 		std::vector<int>	_vector;
 		int					_dequeTime;
 		int					_vectorTime;
+		std::string			_beforeString;
+		std::string			_afterString;
+		std::vector<int>	_jacobsthalSequence;
 };
 
 std::ostream	&operator<<(std::ostream &stream, PmergeMe const &pme);
