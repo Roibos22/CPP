@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 14:01:33 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/05/07 00:09:21 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/07 00:28:16 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,13 @@ class	PmergeMe
 		void	sortVector();
 		void	recursiveSelectionSortVector(std::vector<std::pair<int, int> > &pairs, int low, int high);
 		void	generateSortingSequence(int size);
+		bool	hasDuplicates(const std::vector<int>& data);
 
 		/* -------------- SETTERS & GETTERS ---------------- */
 		std::vector<int>	getVector() const;
 		std::deque<int>		getDeque() const;
-		int					getDequeTime() const;
-		int					getVectorTime() const;
+		double				getDequeTime() const;
+		double				getVectorTime() const;
 
 		/* ------------------ EXCEPTIONS ------------------- */
 
@@ -57,8 +58,8 @@ class	PmergeMe
 	private:
 		std::deque<int>		_deque;
 		std::vector<int>	_vector;
-		int					_dequeTime;
-		int					_vectorTime;
+		double				_dequeTime;
+		double				_vectorTime;
 		std::string			_beforeString;
 		std::string			_afterString;
 		std::vector<int>	_jacobsthalSequence;

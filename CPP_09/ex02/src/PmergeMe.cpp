@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 14:01:31 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/05/07 00:14:30 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/07 00:39:11 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include <algorithm> // for std::sort and std::unique
 
-bool hasDuplicates(const std::vector<int>& data)
+bool	PmergeMe::hasDuplicates(const std::vector<int>& data)
 {
 	std::vector<int> sortedData = data; // Create a copy to avoid modifying the original vector
 	std::sort(sortedData.begin(), sortedData.end());
@@ -25,6 +25,14 @@ bool hasDuplicates(const std::vector<int>& data)
 	}
 	return false;
 }
+
+double getElapsedMicroseconds(clock_t start_time, clock_t end_time) {
+	// Calculate elapsed time in seconds
+	double elapsed_seconds = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC;
+	// Convert to microseconds
+	return elapsed_seconds * 1000;
+}
+
 
 template<typename T>
 std::string vectorToString(const std::vector<T>& vec, const std::string& delimiter = "")
@@ -97,6 +105,7 @@ void	PmergeMe::recursiveSelectionSortVector(std::vector<std::pair<int, int> > &p
 	if (low < high)
 	{
 		int minIndex = findMinIndexVector(pairs, low, high);
+		std::cout << "minIndex: " << minIndex << std::endl;
 		if (pairs[minIndex].first != -1)
 			std::swap(pairs[low], pairs[minIndex]);
 		recursiveSelectionSortVector(pairs, low + 1, high);
@@ -140,6 +149,7 @@ void	PmergeMe::generateSortingSequence(int size)
 void	PmergeMe::sortVector()
 {
 	clock_t start_time = clock();
+	std::cout << start_time << std::endl;
 
 	// create pairs
 	std::vector<std::pair<int, int> >	pairs;
@@ -216,7 +226,8 @@ void	PmergeMe::sortVector()
 	
 
 	clock_t end_time = clock();
-	_vectorTime = end_time - start_time;
+	_vectorTime = getElapsedMicroseconds(start_time, end_time);
+	//_vectorTime = end_time - start_time;
 
 	this->_afterString = vectorToString(this->_vector, " ");
 }
@@ -281,12 +292,12 @@ std::deque<int>		PmergeMe::getDeque() const
 	return (this->_deque);
 }
 
-int					PmergeMe::getVectorTime() const
+double				PmergeMe::getVectorTime() const
 {
 	return (this->_vectorTime);
 }
 
-int					PmergeMe::getDequeTime() const
+double				PmergeMe::getDequeTime() const
 {
 	return (this->_dequeTime);
 }

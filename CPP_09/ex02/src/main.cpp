@@ -6,13 +6,14 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 14:01:28 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/05/07 00:10:46 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/07 00:41:29 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
 // TODO one element in agrs
+// TODO ./PmergeMe 10 9 8 7 6
 
 int main (int argc, char *argv[])
 {
