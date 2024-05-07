@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 14:01:28 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/05/07 00:41:29 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/07 13:17:57 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 // TODO one element in agrs
 // TODO ./PmergeMe 10 9 8 7 6
+// TODO time management also included!
 
 int main (int argc, char *argv[])
 {
@@ -27,6 +28,7 @@ int main (int argc, char *argv[])
 	{
 		PmergeMe pme(argc, argv);
 		pme.sortVector();
+		pme.sortDeque();
 		pme.printResult();
 	}
 	catch ( const std::exception &e )
