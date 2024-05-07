@@ -6,15 +6,11 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 14:01:28 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/05/07 13:17:57 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/07 15:21:23 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
-
-// TODO one element in agrs
-// TODO ./PmergeMe 10 9 8 7 6
-// TODO time management also included!
 
 int main (int argc, char *argv[])
 {
@@ -23,19 +19,21 @@ int main (int argc, char *argv[])
 		std::cerr << "Error" << std::endl;
 		return (1);
 	}
-	
+
 	try
 	{
-		PmergeMe pme(argc, argv);
-		pme.sortVector();
-		pme.sortDeque();
+		PmergeMe	pme;
+		pme.sortVector(argc, argv);
+		pme.sortDeque(argc, argv);
 		pme.printResult();
+		PmergeMe	pme2(pme);
+		std::cout << pme2;
 	}
 	catch ( const std::exception &e )
 	{
-		std::cout << e.what() << std::endl;
+		std::cerr << e.what() << std::endl;
+		return (1);
 	}
 
-
-	//std::cout << std::endl << pme << std::endl;
+	return (0);
 }

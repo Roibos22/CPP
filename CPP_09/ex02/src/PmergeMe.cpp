@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 14:01:31 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/05/07 13:15:10 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/07 15:11:05 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,27 +19,6 @@ PmergeMe::PmergeMe()
 
 }
 
-PmergeMe::PmergeMe(int argc, char **argv)
-{
-	// TODO Duplicates
-	for (int i = 1; i < argc; i++)
-	{
-		int	tmp = atoi(argv[i]);
-		//std::cout << tmp << std::endl;
-		if (tmp >= 0 && tmp <= 2147483647)
-		{
-			this->_deque.push_back(tmp);
-			this->_vector.push_back(tmp);
-		}
-		else
-			throw std::runtime_error("Error");
-		if (hasDuplicates(this->_vector))
-			throw std::runtime_error("Error");
-	}
-	this->_beforeString = vectorToString(this->_vector, " ");
-	this->generateSortingSequence(this->_vector.size());
-}
-
 PmergeMe::~PmergeMe()
 {
 
@@ -49,9 +28,44 @@ PmergeMe::PmergeMe(const PmergeMe &pme) { *this = pme; }
 
 /* ----------------------------- METHODS ------------------------------- */
 
-void	PmergeMe::sortVector()
+void	PmergeMe::prepareDataVector(int argc, char **argv)
+{
+	for (int i = 1; i < argc; i++)
+	{
+		int	tmp = atoi(argv[i]);
+		if (tmp > 0 && tmp <= 2147483647)
+			this->_vector.push_back(tmp);
+		else
+			throw std::runtime_error("Error");
+		if (hasDuplicatesVector(this->_vector))
+			throw std::runtime_error("Error");
+	}
+	this->_beforeString = vectorToString(this->_vector, " ");
+	this->generateSortingSequence(this->_vector.size());
+}
+
+void	PmergeMe::prepareDataDeque(int argc, char **argv)
+{
+	this->_jacobsthalSequence.clear();
+	for (int i = 1; i < argc; i++)
+	{
+		int	tmp = atoi(argv[i]);
+		if (tmp > 0 && tmp <= 2147483647)
+			this->_deque.push_back(tmp);
+		else
+			throw std::runtime_error("Error");
+		if (hasDuplicatesDeque(this->_deque))
+			throw std::runtime_error("Error");
+	}
+	this->_beforeString = dequeToString(this->_deque, " ");
+	this->generateSortingSequence(this->_deque.size());
+}
+
+void	PmergeMe::sortVector(int argc, char **argv)
 {
 	clock_t start_time = clock();
+
+	prepareDataVector(argc, argv);
 
 	// CREATE PAIRS
 	std::vector<std::pair<int, int> >	pairs;
@@ -106,9 +120,10 @@ void	PmergeMe::sortVector()
 	this->_afterString = vectorToString(this->_vector, " ");
 }
 
-void	PmergeMe::sortDeque()
+void	PmergeMe::sortDeque(int argc, char **argv)
 {
 	clock_t start_time = clock();
+	prepareDataDeque(argc, argv);
 
 	// CREATE PAIRS
 	std::deque<std::pair<int, int> > pairs;
@@ -210,12 +225,12 @@ int		PmergeMe::findMinIndexDeque(const std::deque<std::pair<int, int> > &pairs, 
 
 void	PmergeMe::generateSortingSequence(int size)
 {
-	// TODO Refactor out
 	if (size % 2 == 0)
 		size = size / 2;
 	else
 		size = (size / 2) + 1;
 
+	this->_jacobsthalSequence.clear();
 	int currJacobsthal = 1;
 	int lastJacobsthal = 1;
 	_jacobsthalSequence.push_back(1);
@@ -239,16 +254,29 @@ void	PmergeMe::generateSortingSequence(int size)
 
 void	PmergeMe::printResult()
 {
-	 // TODO set width of strings
 	std::cout << "Before: " << this->_beforeString << std::endl;
 	std::cout << "After: " << this->_afterString << std::endl;
 	std::cout << "Time to process a range of " << this->_vector.size() << " elements with std::vector: " << this->getVectorTime() << " us" << std::endl;
 	std::cout << "Time to process a range of " << this->_deque.size() << " elements with std::deque: " << this->getDequeTime() << " us" << std::endl;
+	//std::cout << this->dequeToString(this->_deque, " ") << std::endl;
+	//std::cout << this->vectorToString(this->_vector, " ") << std::endl;
 }
 
-bool	PmergeMe::hasDuplicates(const std::vector<int>& data)
+bool	PmergeMe::hasDuplicatesVector(const std::vector<int>& data)
 {
 	std::vector<int> sortedData = data; // Create a copy to avoid modifying the original vector
+	std::sort(sortedData.begin(), sortedData.end());
+	for (unsigned int i = 1; i < sortedData.size(); ++i)
+	{
+		if (sortedData[i] == sortedData[i - 1])
+			return true;
+	}
+	return false;
+}
+
+bool	PmergeMe::hasDuplicatesDeque(const std::deque<int>& data)
+{
+	std::deque<int> sortedData = data; // Create a copy to avoid modifying the original vector
 	std::sort(sortedData.begin(), sortedData.end());
 	for (unsigned int i = 1; i < sortedData.size(); ++i)
 	{
@@ -261,7 +289,7 @@ bool	PmergeMe::hasDuplicates(const std::vector<int>& data)
 double	PmergeMe::getElapsedMicroseconds(clock_t start_time, clock_t end_time)
 {
 	double	elapsed_seconds = static_cast<double>(end_time - start_time) / CLOCKS_PER_SEC;
-	return (elapsed_seconds * 1000);
+	return (elapsed_seconds * 1000000);
 }
 
 std::string PmergeMe::vectorToString(const std::vector<int>& vec, const std::string& delimiter)
@@ -347,6 +375,21 @@ double				PmergeMe::getDequeTime() const
 	return (this->_dequeTime);
 }
 
+std::string			PmergeMe::getBeforeString() const
+{
+	return (this->_beforeString);
+}
+
+std::string			PmergeMe::getAfterString() const
+{
+	return (this->_afterString);
+}
+
+std::vector<int>	PmergeMe::getJacobsthalSequence() const
+{
+	return (this->_jacobsthalSequence);
+}
+
 /* --------------------------- EXCEPTIONS ------------------------------ */
 
 /* ---------------------------- OVERLOADS ------------------------------ */
@@ -356,14 +399,19 @@ PmergeMe		&PmergeMe::operator=(const PmergeMe &origin)
 {
 	if (this != &origin)
 	{
-		
+		this->_deque = origin.getDeque();
+		this->_vector = origin.getVector();
+		this->_dequeTime = origin.getDequeTime();
+		this->_vectorTime = origin.getVectorTime();
+		this->_beforeString = origin.getBeforeString();
+		this->_afterString = origin.getAfterString();
+		this->_jacobsthalSequence = origin.getJacobsthalSequence();
 	}
 	return (*this);
 }
 
 std::ostream	&operator<<(std::ostream &stream, PmergeMe const &pme)
 {
-	(void)pme;
 	pme.printDeque();
 	pme.printVector();
 	return (stream);

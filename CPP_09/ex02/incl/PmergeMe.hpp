@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 14:01:33 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/05/07 13:14:27 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/07 15:21:10 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,33 +27,36 @@ class	PmergeMe
 	public:
 		/* --------- CONSTRUCTORS & DECONSTRUCORS ---------- */
 		PmergeMe();
-		PmergeMe(int argc, char **argv);
 		~PmergeMe();
 		PmergeMe(const PmergeMe &pme);
 
 		/* ------------------- METHODS --------------------- */
-		void	printResult();
-		void	printDeque() const;
-		void	printVector() const;
-		//void	startTimerDeque();
-		//void	startTimerVector();
-		void	sortDeque();
-		void	sortVector();
-		void	recursiveSelectionSortVector(std::vector<std::pair<int, int> > &pairs, int low, int high);
-		int		findMinIndexVector(const std::vector<std::pair<int, int> > &pairs, int low, int high);
-		void	recursiveSelectionSortDeque(std::deque<std::pair<int, int> > &pairs, int low, int high);
-		int		findMinIndexDeque(const std::deque<std::pair<int, int> > &pairs, int low, int high);
-		void	generateSortingSequence(int size);
-		bool	hasDuplicates(const std::vector<int>& data);
-		double	getElapsedMicroseconds(clock_t start_time, clock_t end_time);
-		std::string vectorToString(const std::vector<int>& vec, const std::string& delimiter);
-		std::string	dequeToString(const std::deque<int>& deq, const std::string& delimiter);
+		void				sortDeque(int argc, char **argv);
+		void				sortVector(int argc, char **argv);
+		void				prepareDataVector(int argc, char **argv);
+		void				prepareDataDeque(int argc, char **argv);
+		void				generateSortingSequence(int size);
+		void				printDeque() const;
+		void				printVector() const;
+		void				recursiveSelectionSortVector(std::vector<std::pair<int, int> > &pairs, int low, int high);
+		int					findMinIndexVector(const std::vector<std::pair<int, int> > &pairs, int low, int high);
+		void				recursiveSelectionSortDeque(std::deque<std::pair<int, int> > &pairs, int low, int high);
+		int					findMinIndexDeque(const std::deque<std::pair<int, int> > &pairs, int low, int high);
+		bool				hasDuplicatesVector(const std::vector<int>& data);
+		bool				hasDuplicatesDeque(const std::deque<int>& data);
+		double				getElapsedMicroseconds(clock_t start_time, clock_t end_time);
+		void				printResult();
+		std::string			vectorToString(const std::vector<int>& vec, const std::string& delimiter);
+		std::string			dequeToString(const std::deque<int>& deq, const std::string& delimiter);
 
 		/* -------------- SETTERS & GETTERS ---------------- */
 		std::vector<int>	getVector() const;
 		std::deque<int>		getDeque() const;
 		double				getDequeTime() const;
 		double				getVectorTime() const;
+		std::string			getBeforeString() const;
+		std::string			getAfterString() const;
+		std::vector<int>	getJacobsthalSequence() const;
 
 		/* ------------------ EXCEPTIONS ------------------- */
 

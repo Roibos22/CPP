@@ -6,7 +6,7 @@
 #    By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/26 16:07:57 by lgrimmei          #+#    #+#              #
-#    Updated: 2024/05/06 23:48:31 by lgrimmei         ###   ########.fr        #
+#    Updated: 2024/05/07 15:01:54 by lgrimmei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,10 +47,7 @@ Exercise 02 PmergeMe
 	-> deque
 	-> vector
 
-
-	1 Number -> 0 JT Numbers
-	2        -> 1
-	3        -> 2
-	4        -> 2
-	5        -> 3
-	6        -> 3
+Resources
+	- https://www.tldraw.com/v/y9Y2Et7vl18fkPZT4UoEKTW?v=268,-1117,1772,1611&p=jEhR30akJPWN_ZhTL5KgI
+	- https://github.com/decidedlyso/merge-insertion-sort?tab=readme-ov-file
+	- https://42born2code.slack.com/archives/CN9RHKQHW/p1709984014933529?thread_ts=1709813537.388959&cid=CN9RHKQHW
