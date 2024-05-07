@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 14:01:31 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/05/07 15:11:05 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/07 16:02:44 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	PmergeMe::prepareDataVector(int argc, char **argv)
 {
 	for (int i = 1; i < argc; i++)
 	{
-		int	tmp = atoi(argv[i]);
+		long long	tmp = atoll(argv[i]);
 		if (tmp > 0 && tmp <= 2147483647)
 			this->_vector.push_back(tmp);
 		else

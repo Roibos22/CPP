@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 19:35:57 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/05/03 20:59:36 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/07 15:36:59 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	RPN::calculate()
 	}
 	
 	std::stack<int>	stack;
-
 	for (size_t i = 0; i < _input.size(); i++)
 	{
 		if (std::isdigit(_input[i]))
@@ -123,7 +122,6 @@ std::ostream	&operator<<(std::ostream &stream, RPN const &rpn)
 {
 	(void)rpn;
 	stream << "Input: " << rpn.getInput() << std::endl;
-	//stream << "Stack: " << rpn.getStack() << std::endl;
 	return (stream);
 }
 

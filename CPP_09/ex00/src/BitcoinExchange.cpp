@@ -54,11 +54,10 @@ void	BitcoinExchange::printRes(int date, double value, std::string dateString)
 	}
 	else
 	{
-		//std::cout << "Exact Date not found." << std::endl;
 		std::map<int, double>::iterator it = this->_contentDb.upper_bound(date);
-		if (it != this->_contentDb.begin()) {
+		if (it != this->_contentDb.begin())
+		{
 			--it;
-			//std::cout << "Closest Date found that is smaller: " << it->first << std::endl;
 			std::cout << it->second * value << std::endl;
 		} else {
 			std::cout << "No smaller date found." << std::endl;
@@ -248,7 +247,7 @@ int		BitcoinExchange::validateDate(std::string date)
 	issDay >> day;
 	if (issYear.fail() || issMonth.fail() || issDay.fail())
 		return (throw InvalidDateException(), 0);
-	if (year < 2004 || year >= 214748 || month < 1 || month > 12) // TODO adjust max year
+	if (year < 2009 || year > 214748 || month < 1 || month > 12)
 		return (throw InvalidDateException(), 0);
 	if (month == 2 && year % 4 == 0 && day > 29)
 		return (throw InvalidDateException(), 0);
