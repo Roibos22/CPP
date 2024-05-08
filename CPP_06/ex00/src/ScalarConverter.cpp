@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 18:33:45 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/04/30 15:21:03 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/08 18:22:46 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ bool	ScalarConverter::checkFormat(const std::string str, const std::string patte
 
 void	ScalarConverter::convertChar(const std::string str)
 {
-	char	c = str[0]; // TODO
+	char	c = static_cast<char>(str[0]);
 	int		i = static_cast<int>(c);
 	float	f = static_cast<float>(c);
 	double	d = static_cast<double>(c);
@@ -96,16 +96,23 @@ void	ScalarConverter::convertChar(const std::string str)
 
 void	ScalarConverter::convertInt(const std::string str)
 {
-	int			i = atoi(str.c_str());
-	char		c = static_cast<char>(i);
-	float		f = static_cast<float>(i);
-	double		d = static_cast<double>(i);
-	printConversions(c, i, f, d, str);
+	int			i = atoi(str.c_str()); // TODO
+	long long	input = atoll(str.c_str()); // TODO
+
+	if (input > INT_MAX || input < INT_MIN)
+		printConversions(0, 0, 0, 0, str);
+	else
+	{
+		char		c = static_cast<char>(i);
+		float		f = static_cast<float>(i);
+		double		d = static_cast<double>(i);
+		printConversions(c, i, f, d, str);
+	}
 }
 
 void	ScalarConverter::convertFloat(const std::string str)
 {
-	float		f = strtof(str.c_str(), NULL);
+	float		f = strtof(str.c_str(), NULL); // TODO
 	int			i = static_cast<int>(f);
 	char		c = static_cast<char>(f);
 	double		d = static_cast<double>(f);
@@ -114,7 +121,7 @@ void	ScalarConverter::convertFloat(const std::string str)
 
 void	ScalarConverter::convertDouble(const std::string str)
 {
-	double		d = strtod(str.c_str(), NULL);
+	double		d = strtod(str.c_str(), NULL); // TODO
 	float		f = static_cast<float>(d);
 	int			i = static_cast<int>(d);
 	char		c = static_cast<char>(d);
@@ -123,13 +130,13 @@ void	ScalarConverter::convertDouble(const std::string str)
 
 void	ScalarConverter::printConversions(char c, int i, float f, double d, std::string str)
 {
-	long long input = atoll(str.c_str());
+	long long input = atoll(str.c_str()); // TODO
 	input = 0;
 
 	//bool	impFlag = false;
 
 	// PRINT CHAR
-	if (d < 0 || d > 255)
+	if ((c == static_cast<char>(0) && str == "0") || (c == 0 && str != "0") || d < 0 || d > 255)
 		std::cout << "char: impossible" << std::endl;
 	else if (isprint(c))
 		std::cout << "char: '" << c << "'" << std::endl;
@@ -137,14 +144,14 @@ void	ScalarConverter::printConversions(char c, int i, float f, double d, std::st
 		std::cout << "char: Non displayable" << std::endl;
 
 	// PRINT INT
-	if (d < std::numeric_limits<int>::min() || d > std::numeric_limits<int>::max())
+	if (d < std::numeric_limits<int>::min() || d > std::numeric_limits<int>::max() || (i == 0 && str != "0"))
 		std::cout << "int: impossible" << std::endl;
 	else
 		std::cout << "int: " << i << std::endl;
 
 	// PRINT Float
 	std::cout << "float: ";
-	if (std::isnan(static_cast<double>(f)))
+	if (std::isnan(static_cast<double>(f)) || (f == static_cast<double>(0) && str != "0"))
 		std::cout << "impossible" << std::endl;
 	else
 	{
@@ -156,10 +163,8 @@ void	ScalarConverter::printConversions(char c, int i, float f, double d, std::st
 	
 	// PRINT DOUBLE
 	std::cout << "double: ";
-	if (std::isnan(d))
+	if (std::isnan(d) || (f == static_cast<double>(0) && str != "0"))
 		std::cout << " impossible " << std::endl;
-	/* if (d < std::numeric_limits<double>::min() || d > std::numeric_limits<double>::max())
-		std::cout << " impossible " << std::numeric_limits<double>::min() << std::endl; */
 	else
 	{
 		std::cout << d;
@@ -176,17 +181,17 @@ e_type	ScalarConverter::getType(const::std::string &str)
 	e_type res = UNDEFINED;
 	if (str == "nan" || str == "nanf")
 		return(NOTANUMBER);
-	if (str == "+inf" || str == "+inff")
+	else if (str == "+inf" || str == "+inff")
 		return(POS_INF);
-	if (str == "-inf" || str == "-inff")
+	else if (str == "-inf" || str == "-inff")
 		return(NEG_INF);
-	if (checkFormat(str, "^.$") && !isdigit(str[0]))
+	else if (checkFormat(str, "^.$") && !isdigit(str[0]))
 		res = CHAR;
-	if (checkFormat(str, "^[[:space:]]*[+-]?[0-9]+$"))
+	else if (checkFormat(str, "^[[:space:]]*[+-]?[0-9]+$"))
 		res = INT;
-	if (checkFormat(str, "^[[:space:]]*[+-]?[0-9]+\\.[0-9]+f$") || str == "nanf" || str == "+inff" || str == "-inff")
+	else if (checkFormat(str, "^[[:space:]]*[+-]?[0-9]+\\.[0-9]+f$") || str == "nanf" || str == "+inff" || str == "-inff")
 		res = FLOAT;
-	if (checkFormat(str, "^[[:space:]]*[+-]?[0-9]+\\.[0-9]+$")|| str == "nan" || str == "+inf" || str == "-inf")
+	else if (checkFormat(str, "^[[:space:]]*[+-]?[0-9]+\\.[0-9]+$") || str == "nan" || str == "+inf" || str == "-inf")
 		res = DOUBLE;
 	std::cout << res << std::endl;
 	return (res);

@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 18:33:42 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/04/29 15:03:59 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/08 18:00:36 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #include <regex.h>
 #include <limits>
 #include <stdlib.h>
+#include <limits.h>
 
 enum	e_type
 {
