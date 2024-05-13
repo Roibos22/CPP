@@ -6,15 +6,12 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 17:51:53 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/05/08 18:23:47 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/13 15:33:27 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <ScalarConverter.hpp>
-
-// functionality should be done now
-// TODO: double check all casts!
 
 int main(int argc, char *argv[])
 {

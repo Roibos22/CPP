@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 18:33:45 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/05/08 18:22:46 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/13 15:33:21 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,8 @@ void	ScalarConverter::convertChar(const std::string str)
 
 void	ScalarConverter::convertInt(const std::string str)
 {
-	int			i = atoi(str.c_str()); // TODO
-	long long	input = atoll(str.c_str()); // TODO
+	int			i = atoi(str.c_str());
+	long long	input = atoll(str.c_str());
 
 	if (input > INT_MAX || input < INT_MIN)
 		printConversions(0, 0, 0, 0, str);
@@ -112,7 +112,7 @@ void	ScalarConverter::convertInt(const std::string str)
 
 void	ScalarConverter::convertFloat(const std::string str)
 {
-	float		f = strtof(str.c_str(), NULL); // TODO
+	float		f = strtof(str.c_str(), NULL);
 	int			i = static_cast<int>(f);
 	char		c = static_cast<char>(f);
 	double		d = static_cast<double>(f);
@@ -121,7 +121,7 @@ void	ScalarConverter::convertFloat(const std::string str)
 
 void	ScalarConverter::convertDouble(const std::string str)
 {
-	double		d = strtod(str.c_str(), NULL); // TODO
+	double		d = strtod(str.c_str(), NULL);
 	float		f = static_cast<float>(d);
 	int			i = static_cast<int>(d);
 	char		c = static_cast<char>(d);
@@ -130,10 +130,8 @@ void	ScalarConverter::convertDouble(const std::string str)
 
 void	ScalarConverter::printConversions(char c, int i, float f, double d, std::string str)
 {
-	long long input = atoll(str.c_str()); // TODO
+	long long input = atoll(str.c_str());
 	input = 0;
-
-	//bool	impFlag = false;
 
 	// PRINT CHAR
 	if ((c == static_cast<char>(0) && str == "0") || (c == 0 && str != "0") || d < 0 || d > 255)
@@ -156,19 +154,19 @@ void	ScalarConverter::printConversions(char c, int i, float f, double d, std::st
 	else
 	{
 		std::cout << f;
-		if ((int)f == f) // TODO
+		if (static_cast<int>(f) == f)
 			std::cout << ".0";
 		std::cout << "f" << std::endl;
 	}
 	
 	// PRINT DOUBLE
 	std::cout << "double: ";
-	if (std::isnan(d) || (f == static_cast<double>(0) && str != "0"))
+	if (std::isnan(d) || (d == static_cast<double>(0) && str != "0"))
 		std::cout << " impossible " << std::endl;
 	else
 	{
 		std::cout << d;
-		if ((int)d == d) // TODO
+		if (static_cast<int>(d) == d)
 			std::cout << ".0";
 		std::cout << std::endl;
 	}
@@ -193,7 +191,7 @@ e_type	ScalarConverter::getType(const::std::string &str)
 		res = FLOAT;
 	else if (checkFormat(str, "^[[:space:]]*[+-]?[0-9]+\\.[0-9]+$") || str == "nan" || str == "+inf" || str == "-inf")
 		res = DOUBLE;
-	std::cout << res << std::endl;
+	//std::cout << res << std::endl;
 	return (res);
 }
 
@@ -208,7 +206,7 @@ ScalarConverter		&ScalarConverter::operator=(const ScalarConverter &origin)
 
 std::ostream	&operator<<(std::ostream &stream, ScalarConverter const &scalarconverter)
 {
-	(void)scalarconverter;
+	(void) scalarconverter;
 	stream << "Scalar Converter" << std::endl;
 	return (stream);
 }
