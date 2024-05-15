@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 18:33:45 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/05/15 14:48:23 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/15 14:53:08 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ bool	ScalarConverter::isNullString(const std::string str)
 void	ScalarConverter::printConversions(char c, int i, float f, double d, std::string str)
 {
 	// PRINT CHAR
-	if ((c == static_cast<char>(0) && str == "0") || (static_cast<int>(c) == 0 && str != "0") || static_cast<int>(d) < 0 || static_cast<int>(d) > 255)
+	if ((static_cast<int>(c) == 0 && !isNullString(str)) || static_cast<int>(d) < 0 || static_cast<int>(d) > 255)
 		std::cout << "char: impossible" << std::endl;
 	else if (isprint(static_cast<int>(c)))
 		std::cout << "char: '" << c << "'" << std::endl;

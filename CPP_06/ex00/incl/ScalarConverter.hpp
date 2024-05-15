@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 18:33:42 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/05/15 14:44:12 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/15 14:50:23 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ enum	e_type
 class	ScalarConverter
 {
 	public:
-
 		/* ------------------- METHODS --------------------- */
 		static void	convert(const std::string &str);
 		static bool	checkFormat(std::string str, const std::string pattern);
