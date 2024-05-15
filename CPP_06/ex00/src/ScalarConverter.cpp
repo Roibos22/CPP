@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 18:33:45 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/05/13 15:33:21 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/15 14:48:23 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	ScalarConverter::convertInt(const std::string str)
 	int			i = atoi(str.c_str());
 	long long	input = atoll(str.c_str());
 
-	if (input > INT_MAX || input < INT_MIN)
+	if (input > static_cast<long long>(INT_MAX) || input < static_cast<long long>(INT_MIN))
 		printConversions(0, 0, 0, 0, str);
 	else
 	{
@@ -128,28 +128,32 @@ void	ScalarConverter::convertDouble(const std::string str)
 	printConversions(c, i, f, d, str);
 }
 
+bool	ScalarConverter::isNullString(const std::string str)
+{
+	if (str == "0" || str == "0.0" || str == "0.0f" || str == "-0" || str == "-0.0" || str == "-0.0f")
+		return (true);
+	return (false);
+}
+
 void	ScalarConverter::printConversions(char c, int i, float f, double d, std::string str)
 {
-	long long input = atoll(str.c_str());
-	input = 0;
-
 	// PRINT CHAR
-	if ((c == static_cast<char>(0) && str == "0") || (c == 0 && str != "0") || d < 0 || d > 255)
+	if ((c == static_cast<char>(0) && str == "0") || (static_cast<int>(c) == 0 && str != "0") || static_cast<int>(d) < 0 || static_cast<int>(d) > 255)
 		std::cout << "char: impossible" << std::endl;
-	else if (isprint(c))
+	else if (isprint(static_cast<int>(c)))
 		std::cout << "char: '" << c << "'" << std::endl;
 	else
 		std::cout << "char: Non displayable" << std::endl;
 
 	// PRINT INT
-	if (d < std::numeric_limits<int>::min() || d > std::numeric_limits<int>::max() || (i == 0 && str != "0"))
+	if (d < static_cast<double>(std::numeric_limits<int>::min()) || d > static_cast<double>(std::numeric_limits<int>::max()) || (i == 0 && !isNullString(str)))
 		std::cout << "int: impossible" << std::endl;
 	else
 		std::cout << "int: " << i << std::endl;
 
 	// PRINT Float
 	std::cout << "float: ";
-	if (std::isnan(static_cast<double>(f)) || (f == static_cast<double>(0) && str != "0"))
+	if (std::isnan(static_cast<double>(f)) || (f == static_cast<double>(0) && !isNullString(str)))
 		std::cout << "impossible" << std::endl;
 	else
 	{
@@ -161,7 +165,7 @@ void	ScalarConverter::printConversions(char c, int i, float f, double d, std::st
 	
 	// PRINT DOUBLE
 	std::cout << "double: ";
-	if (std::isnan(d) || (d == static_cast<double>(0) && str != "0"))
+	if (std::isnan(d) || (d == static_cast<double>(0) && !isNullString(str)))
 		std::cout << " impossible " << std::endl;
 	else
 	{

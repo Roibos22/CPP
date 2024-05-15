@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 18:33:42 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/05/08 18:00:36 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/15 14:44:12 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ class	ScalarConverter
 		static void	convertDouble(const std::string str);
 		static void	convertFloat(const std::string str);
 		static void	printConversions(char c, int i, float f, double d, std::string str);
+		static bool	isNullString(const std::string str);
 
 		/* -------------- SETTERS & GETTERS ---------------- */
 		static e_type	getType(const::std::string &str);
