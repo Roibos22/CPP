@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 21:46:03 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/03/11 00:24:29 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/15 15:06:11 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ Base	*generate(void)
 
 void	identify(Base* p)
 {
-	if (dynamic_cast<A*>(p))
+	if (dynamic_cast<A*>(p) && dynamic_cast<A*>(p) != NULL)
 		std::cout << "*: Identified Class A!" << std::endl;
-	else if (dynamic_cast<B*>(p))
+	else if (dynamic_cast<B*>(p) && dynamic_cast<B*>(p) != NULL)
 		std::cout << "*: Identified Class B!" << std::endl;
-	else if (dynamic_cast<C*>(p))
+	else if (dynamic_cast<C*>(p) && dynamic_cast<C*>(p) != NULL)
 		std::cout << "*: Identified Class C!" << std::endl;
 	else
 		std::cout << "*: Could not identify a class" << std::endl;
