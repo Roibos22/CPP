@@ -6,7 +6,7 @@
 #    By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/26 15:52:02 by lgrimmei          #+#    #+#              #
-#    Updated: 2024/04/26 17:46:45 by lgrimmei         ###   ########.fr        #
+#    Updated: 2024/05/17 18:20:11 by lgrimmei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -126,4 +126,4 @@ Container adapters like std::stack, std::queue, and std::priority_queue provide
 a restricted interface to the underlying container to ensure the behavior fits
 the adapter's concept (LIFO for stack, FIFO for queue, and ordered by priority
 for priority_queue). The choice of which container or container adapter to use
-depends on the specific problem domain and performance requirements.
+depends on the specific problem domain and performance requirements. 
