@@ -6,7 +6,7 @@
 /*   By: lgrimmei <lgrimmei@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 19:35:57 by lgrimmei          #+#    #+#             */
-/*   Updated: 2024/05/07 15:36:59 by lgrimmei         ###   ########.fr       */
+/*   Updated: 2024/05/22 16:27:50 by lgrimmei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,11 @@ void	RPN::calculate()
 					stack.push(a * b);
 					break;
 				case '/':
+					if (a == 0)
+					{
+						std::cerr << "Error: division by zero" << std::endl;
+						return ;
+					}
 					stack.push(b / a);
 					break;
 			}
